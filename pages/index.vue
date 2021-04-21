@@ -1,42 +1,69 @@
+<script lang="ts">
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import Logo from '@/components/Logo.vue'
+import axios from 'axios'
+
+type State = {
+  name: string
+  password: string
+}
+
+const initialState = (): State => ({
+  name: '',
+  password: '',
+})
+
+export default defineComponent({
+  components: {
+    Logo,
+  },
+  setup() {
+    const state = reactive<State>(initialState())
+
+    const signUp = async () => {
+      const params: State = {
+        name: state.name,
+        password: state.password,
+      }
+      const res = await axios.post('http://localhost:9010/signup', params)
+      console.log(res, 'res')
+    }
+    return {
+      ...toRefs(state),
+      signUp,
+    }
+  },
+})
+</script>
+
 <template>
   <div class="container">
     <div>
       <Logo />
       <h1 class="title">jwt_p</h1>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+        <div class="p-2">
+          <label class="" for="">name:</label>
+          <input class="ml-2 border-2" type="text" v-model="name" />
+        </div>
+        <div class="p-2">
+          <label for="">pass:</label>
+          <input class="ml-4 border-2" type="password" v-model="password" />
+        </div>
+        <div class="mt-5 ml-2">
+          <button
+            @click="signUp"
+            class="bg-green-500 text-white py-2 px-4 rounded-md font-semibold"
+          >
+            登録する
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({})
-</script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
+<style scoped>
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -65,6 +92,6 @@ export default Vue.extend({})
 }
 
 .links {
-  padding-top: 15px;
+  text-align: left;
 }
 </style>
