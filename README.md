@@ -2,7 +2,7 @@
 
 ## Build Setup
 
-```bash
+```
 # install dependencies
 $ npm install
 
@@ -17,4 +17,15 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## doc
+### Tailwind css
+https://tailwindcss.com/
+
+### Nuxt Composition API
+https://composition-api.nuxtjs.org/
+
+### Nuxt
+https://ja.nuxtjs.org/
+
+### JWT Vue
+https://bezkoder.com/jwt-vue-vuex-authentication/
