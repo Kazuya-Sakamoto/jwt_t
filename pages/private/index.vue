@@ -25,11 +25,19 @@ export default defineComponent({
     const state = reactive<State>(initialState())
 
     const publicFunc = async () => {
+      const token = localStorage.getItem('token')
+      const auth = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }
       const params = {
         name: 'sakamoto',
       }
+
       try {
-        const res = await axios.post(`${URL}/public`, params)
+        const res = await axios.post(`${URL}/private`, params, {
+          headers: auth,
+        })
         console.log(res, 'res')
         state.response = res.data
       } catch (error) {

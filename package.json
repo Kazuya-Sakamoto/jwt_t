@@ -17,6 +17,7 @@
     "@nuxtjs/composition-api": "^0.23.2",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "master": "^0.0.14",
     "nuxt": "^2.14.6"
   },
   "devDependencies": {
