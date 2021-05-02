@@ -17,6 +17,43 @@ $ npm run start
 $ npm run generate
 ```
 
+## API
+[jwt_package_sample](https://github.com/tsubaoza0901/jwt_package_sample)
+
+### 1. アクセス時トークン不要な URL
+**① トークンなしでアクセスできる URL**
+
+POST http://127.0.0.1:9010/public
+```
+{
+    "name": "xxxxxxx"
+}
+```
+
+**② user 登録およびトークン取得のための URL**
+
+POST http://127.0.0.1:9010/signup
+
+```
+{
+    "name": "admin",
+    "password": "password"
+}
+```
+※signup に POST した際の Response としてトークンを取得できる。トークンが必要な URL にアクセスする際には、そのトークンを header として設定してアクセスする。
+
+### 2. アクセス時トークンが必要な URL
+POST http://127.0.0.1:9010/api/private
+
+```
+{
+    "name": "xxxxxxx"
+}
+```
+
+※signup で取得したトークンを header に設定していないとアクセスできない。
+
+
 ## doc
 ### Tailwind css
 https://tailwindcss.com/
@@ -29,3 +66,5 @@ https://ja.nuxtjs.org/
 
 ### JWT Vue
 https://bezkoder.com/jwt-vue-vuex-authentication/
+
+
