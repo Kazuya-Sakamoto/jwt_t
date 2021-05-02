@@ -29,7 +29,9 @@ export default defineComponent({
         name: 'sakamoto',
       }
       try {
-        const res = await axios.post(`${URL}/public`, params)
+        // const res = await axios.post(`${URL}/public`, params)
+        // FIXME: query parameter test
+        const res = await axios.post(`${URL}/public`, null, { params: params })
         console.log(res, 'res')
         state.response = res.data
       } catch (error) {

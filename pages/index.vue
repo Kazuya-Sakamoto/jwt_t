@@ -31,8 +31,8 @@ export default defineComponent({
       const res = await axios.post(`${URL}/signup`, params)
       console.log(res, 'res')
       // const token = response.headers['access-token']
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('user_id', res.data.user_id)
+      localStorage.setItem('token', res.data['token'])
+      localStorage.setItem('user_id', res.data['user_id'])
       return router.push({ path: '/private' })
     }
     return {

@@ -12,10 +12,12 @@ const URL = 'http://localhost:9010'
 
 type State = {
   response: any
+  userId: null | string
 }
 
 const initialState = (): State => ({
   response: '',
+  userId: '',
 })
 export default defineComponent({
   components: {
@@ -23,22 +25,19 @@ export default defineComponent({
   },
   setup() {
     const state = reactive<State>(initialState())
-
-    const publicFunc = async () => {
-      const token = localStorage.getItem('token')
+    state.userId = localStorage.getItem('user_id')
+    const privateFunc = async () => {
       const auth = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       }
       const params = {
-        name: 'sakamoto',
+        user_id: state.userId,
       }
 
       try {
-        const res = await axios.post(`${URL}/private`, params, {
+        const res = await axios.post(`${URL}/api/private`, params, {
           headers: auth,
         })
-        console.log(res, 'res')
         state.response = res.data
       } catch (error) {
         console.log(error)
@@ -46,7 +45,7 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      await publicFunc()
+      await privateFunc()
     })
 
     return {
